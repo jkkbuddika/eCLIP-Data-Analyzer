@@ -57,7 +57,7 @@ class CutAdapt:
                         'clumpify.sh',
                         'in1=' + trim_file_R1, 'in2=' + trim_file_R2,
                         'out1=' + dupCol_file_R1, 'out2=' + dupCol_file_R2,
-                        'dedupe subs=1 dupedist=40 spany=t'
+                        'dedupe dupedist=40 spany=t'
                     ]
 
                     command = ' '.join(command)
