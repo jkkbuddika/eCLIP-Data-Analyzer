@@ -18,41 +18,75 @@ class PureCLIPPeakCaller():
 
         ctw = ColorTextWriter.ColorTextWriter()
 
-        bam_list = sorted(glob.glob(self.input_dir + '*_UV*.bam'))
+        uv1_list = sorted(glob.glob(self.input_dir + '*_UV1*.bam'))
+        uv2_list = sorted(glob.glob(self.input_dir + '*_UV2*.bam'))
+        input_list = sorted(glob.glob(self.input_dir + '*_In*.bam'))
 
-        print(ctw.CRED + 'Merging replicates and indexing ' + ctw.CBLUE + '...' + ctw.CEND + '\n')
+        x = 0
 
-        merged_bam = outdir + '/' + os.path.basename(bam_list[0]).split(self.extensions[4])[0] + '_merged.bam'
+        for (i, j) in zip(uv1_list, uv2_list):
 
-        command = [
-            'samtools merge', merged_bam, ' '.join([j for j in bam_list])
-        ]
+            print(ctw.CRED + 'Merging replicates and indexing:' + ctw.CBLUE + os.path.basename(i) + ctw.CRED + ' and ' + ctw.CBLUE + os.path.basename(j) + ctw.CRED + ' ...' + ctw.CEND + '\n')
 
-        command = ' '.join(command)
-        sp.check_call(command, shell=True)
-        sp.check_call(' '.join(['samtools index', merged_bam]), shell=True)
+            merged_bam = outdir + '/' + os.path.basename(uv1_list[0]).split(self.extensions[4])[0] + '_merged.bam'
 
-        print(ctw.CRED + 'Peak Calling using PureCLIP ' + ctw.CBLUE + '...' + ctw.CEND + '\n')
+            command = [
+                'samtools merge', merged_bam, i, j
+            ]
 
-        outfile_prefix = outdir + '/' + 'pureclip_crosslink'
+            command = ' '.join(command)
+            sp.check_call(command, shell=True)
+            sp.check_call(' '.join(['samtools index', merged_bam]), shell=True)
 
-        command = [
-            'pureclip',
-            '-i', merged_bam, '-bai', merged_bam + '.bai',
-            '-g', self.genome_fa, '-ld -nt 8',
-            '-o', outfile_prefix + '_sites.bed',
-            '-or', outfile_prefix + '_regions.bed'
-        ]
+            #### Peak Calling with no Input Normalization
 
-        command = ' '.join(command)
-        sp.check_call(command, shell=True)
+            print(ctw.CRED + 'Peak Calling using PureCLIP ' + ctw.CBLUE + '...' + ctw.CEND + '\n')
 
-        command = [
-            'cat', outfile_prefix + '_sites.bed', '|',
-            'cut -f 1,2,3,4,5,6 >', outfile_prefix + '_sites_short.bed'
-        ]
+            outfile_prefix = outdir + '/' + 'pureclip_crosslink'
 
-        command = ' '.join(command)
-        sp.check_call(command, shell=True)
+            command = [
+                'pureclip',
+                '-i', merged_bam, '-bai', merged_bam + '.bai',
+                '-g', self.genome_fa, '-ld -nt 8',
+                '-o', outfile_prefix + '_sites.bed',
+                '-or', outfile_prefix + '_regions.bed'
+            ]
+
+            command = ' '.join(command)
+            sp.check_call(command, shell=True)
+
+            command = [
+                'cat', outfile_prefix + '_sites.bed', '|',
+                'cut -f 1,2,3,4,5,6 >', outfile_prefix + '_sites_short.bed'
+            ]
+
+            command = ' '.join(command)
+            sp.check_call(command, shell=True)
+
+            #### Peak Calling with Input Normalization
+
+            sp.check_call(' '.join(['samtools index', input_list[x]]), shell=True)
+
+            command = [
+                'pureclip',
+                '-i', merged_bam, '-bai', merged_bam + '.bai',
+                '-g', self.genome_fa, '-ld -nt 8',
+                '-o', outfile_prefix + '_INnorm_sites.bed',
+                '-or', outfile_prefix + '_INnorm_regions.bed',
+                '-ibam', input_list[x], '-ibai', input_list[x] + '.bai'
+            ]
+
+            command = ' '.join(command)
+            sp.check_call(command, shell=True)
+
+            command = [
+                'cat', outfile_prefix + '_INnorm_sites.bed', '|',
+                'cut -f 1,2,3,4,5,6 >', outfile_prefix + '_INnorm_sites_short.bed'
+            ]
+
+            command = ' '.join(command)
+            sp.check_call(command, shell=True)
+
+            x = x + 1
 
         print(ctw.CBEIGE + ctw.CBOLD + 'Peak Calling Completed!!!' + ctw.CEND)
