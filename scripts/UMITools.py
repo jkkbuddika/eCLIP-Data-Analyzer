@@ -82,7 +82,8 @@ class UMITools:
 
             command.extend([
                 '-S', output_file,
-                '--output-stats=' + output_file.split('.bam')[0]
+                '-L', output_file.split(self.extensions[4])[0] + '.log',
+                '--method unique'
             ])
 
             command = ' '.join(command)

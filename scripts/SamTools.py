@@ -31,7 +31,7 @@ class SamTools():
                 command = ['samtools sort -@', self.threads,'-T', outdir + '/', i, '|']
 
                 if self.seq_method == 'single': command.extend(['samtools view -O BAM -@', self.threads])
-                if self.seq_method == 'paired': command.extend(['samtools view -F 2316 -f 3 -O BAM -@', self.threads])
+                if self.seq_method == 'paired': command.extend(['samtools view -f 3 -O BAM -@', self.threads])
 
                 command.extend(['-o', output_file])
 

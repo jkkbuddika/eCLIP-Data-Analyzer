@@ -60,6 +60,9 @@ class CommonVariables:
     sam_sorted = home_dir + 'sam_sorted/'
     sam_retrieved_r2 = home_dir + 'sam_retrieved_r2/'
 
+    ## BedTools
+    crosslink_data = home_dir + 'crosslink_data/'
+
     ## DeepTools BigWig Files
     bigwig_files = home_dir + 'bigwig_files/'
 
