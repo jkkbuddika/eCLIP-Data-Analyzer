@@ -62,8 +62,16 @@ class CrosslinkHunter:
                 sp.check_call(command, shell=True)
 
                 command = [
-                    'sort -k1,1 -k2,2n', output_file.split('.bed')[0] + bedgraph_extension[x], '|',
-                    'bedGraphToBigWig', fai_file, output_file.split('.bed')[0] + bigwig_extension[x]
+                    'sort -k1,1 -k2,2n', output_file.split('.bed')[0] + bedgraph_extension[x],
+                    '>', output_file.split('.bed')[0] + '_sorted' + bedgraph_extension[x]
+                ]
+
+                command = ' '.join(command)
+                sp.check_call(command, shell=True)
+
+                command = [
+                    'bedGraphToBigWig', output_file.split('.bed')[0] + '_sorted' + bedgraph_extension[x], fai_file,
+                    output_file.split('.bed')[0] + bigwig_extension[x]
                 ]
 
                 command = ' '.join(command)
