@@ -16,25 +16,35 @@ class PureCLIPPeakCaller():
         outdir = os.path.join(self.home_dir, 'pure_clip_pc')
         if not os.path.isdir(outdir): os.mkdir(outdir)
 
-        file_list = sorted(glob.glob(self.input_dir + '*_UV*.bam'))
-        input_bam = sorted(glob.glob(self.input_dir + '*_In*.bam'))
-
         ctw = ColorTextWriter.ColorTextWriter()
 
-        for i in file_list:
-            print(ctw.CRED + 'Peak Calling: ' + ctw.CBLUE + os.path.basename(i) + ctw.CRED + ' ...' + ctw.CEND + '\n')
+        bam_list = sorted(glob.glob(self.input_dir + '*_UV*.bam'))
 
-            output_file = outdir + '/' + os.path.basename(i).split('.bam')[0] + '_peakCall' + self.extensions[6]
+        print(ctw.CRED + 'Merging replicates ' + ctw.CBLUE + '...' + ctw.CEND + '\n')
 
-            param = [
-                'pureclip',
-                '-i', i, '-bai', i + '.bai',
-                '-g', self.genome_fa, '-nt 10',
-                '-o', output_file,
-                '-ibam', input_bam[0], '-ibai', input_bam[0] + '.bai'
-            ]
+        merged_bam = outdir + '/' + os.path.basename(bam_list[0]).split(self.extensions[4])[0] + '_merged.bam'
 
-            command = ' '.join(param)
-            sp.check_call(command, shell=True)
+        command = [
+            'samtools merge', merged_bam, ' '.join([j for j in bam_list])
+        ]
+
+        command = ' '.join(command)
+        sp.check_call(command, shell=True)
+        sp.check_call(' '.join(['samtools index', merged_bam]), shell=True)
+
+        print(ctw.CRED + 'Peak Calling using PureCLIP ' + ctw.CBLUE + '...' + ctw.CEND + '\n')
+
+        outfile_prefix = outdir + '/' + 'pureclip_crosslink'
+
+        command = [
+            'pureclip',
+            '-i', merged_bam, '-bai', merged_bam + '.bai',
+            '-g', self.genome_fa, '-ld -nt 8',
+            '-o', outfile_prefix + '_sites.bed',
+            '-or', outfile_prefix + '_regions.bed'
+        ]
+
+        command = ' '.join(command)
+        sp.check_call(command, shell=True)
 
         print(ctw.CBEIGE + ctw.CBOLD + 'Peak Calling Completed!!!' + ctw.CEND)

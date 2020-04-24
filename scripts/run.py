@@ -58,10 +58,10 @@ cv = CommonVariables.CommonVariables()
 #dedup_umi = UMITools.UMITools(cv.home_dir, cv.sam_sorted, cv.extensions, gv.seq_method)
 #dedup_umi.dedup()
 
-cl = CrosslinkHunter.CrosslinkHunter(cv.home_dir, cv.umi_dedup, cv.genome_fa, cv.extensions)
-cl.crosslink()
-cl.cldata_extractor()
-cl.ins_del_finder()
+#cl = CrosslinkHunter.CrosslinkHunter(cv.home_dir, cv.umi_dedup, cv.genome_fa, cv.extensions)
+#cl.crosslink()
+#cl.cldata_extractor()
+#cl.ins_del_finder()
 
 #bw = BigWigFileMaker.BigWigFileMaker(cv.home_dir, cv.umi_dedup, cv.extensions)
 #bw.bigwig()
@@ -72,16 +72,16 @@ cl.ins_del_finder()
 #mqc = MultiQCRunner.MultiQCRunner(cv.home_dir)
 #mqc.multiqc()
 
-#if gv.seq_method == 'paired':
-    #sr2r = SamTools.SamTools(cv.home_dir, cv.umi_dedup, cv.Threads, cv.extensions, gv.seq_method)
-    #sr2r.sam_retrieval()
+if gv.seq_method == 'paired':
+    sr2r = SamTools.SamTools(cv.home_dir, cv.umi_dedup, cv.Threads, cv.extensions, gv.seq_method)
+    sr2r.sam_retrieval()
 
-    #pc = PureCLIPPeakCaller.PureCLIPPeakCaller(cv.home_dir, cv.sam_retrieved_r2, cv.genome_fa, cv. extensions)
-    #pc.peak_caller()
+    pc = PureCLIPPeakCaller.PureCLIPPeakCaller(cv.home_dir, cv.sam_retrieved_r2, cv.genome_fa, cv. extensions)
+    pc.peak_caller()
 
-#elif gv.seq_method == 'single':
-    #pc = PureCLIPPeakCaller.PureCLIPPeakCaller(cv.home_dir, cv.umi_dedup, cv.genome_fa, cv.extensions)
-    #pc.peak_caller()
+elif gv.seq_method == 'single':
+    pc = PureCLIPPeakCaller.PureCLIPPeakCaller(cv.home_dir, cv.umi_dedup, cv.genome_fa, cv.extensions)
+    pc.peak_caller()
 
 ctw = ColorTextWriter.ColorTextWriter()
 print('\n' + ctw.CGREEN + ctw.CBOLD + ctw.CBLINK + ctw.CURL +'Data analysis successfully completed !!!' + ctw.CBLACK + ctw.CEND + '\n')
