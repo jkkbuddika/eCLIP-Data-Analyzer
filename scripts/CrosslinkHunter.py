@@ -46,18 +46,28 @@ class CrosslinkHunter:
 
             #### Make coverage tracks for plus and minus strands
             strand = ['+', '-']
-            file_extension = ['_plus.bedgraph', '_minus.bedgraph']
+            bedgraph_extension = ['_plus.bedgraph', '_minus.bedgraph']
+            bigwig_extension = ['_plus.bw', '_minus.bw']
 
             x = 0
 
             for j in strand:
-                genomecov = [
+
+                command = [
                     'bedtools genomecov -bg -strand', j, '-5 -i', output_file, '-g', fai_file, #'-scale', str(scale_fac),
-                    '>', output_file.split('.bed')[0] + file_extension[x]
+                    '>', output_file.split('.bed')[0] + bedgraph_extension[x]
                 ]
 
-                genomecov = ' '.join(genomecov)
-                sp.check_call(genomecov, shell=True)
+                command = ' '.join(command)
+                sp.check_call(command, shell=True)
+
+                command = [
+                    'sort -k1,1 -k2,2n', output_file.split('.bed')[0] + bedgraph_extension[x], '|',
+                    'bedGraphToBigWig', fai_file, output_file.split('.bed')[0] + bigwig_extension[x]
+                ]
+
+                command = ' '.join(command)
+                sp.check_call(command, shell=True)
 
                 x = x + 1
 
