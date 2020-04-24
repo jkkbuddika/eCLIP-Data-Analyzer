@@ -20,7 +20,7 @@ class PureCLIPPeakCaller():
 
         bam_list = sorted(glob.glob(self.input_dir + '*_UV*.bam'))
 
-        print(ctw.CRED + 'Merging replicates ' + ctw.CBLUE + '...' + ctw.CEND + '\n')
+        print(ctw.CRED + 'Merging replicates and indexing ' + ctw.CBLUE + '...' + ctw.CEND + '\n')
 
         merged_bam = outdir + '/' + os.path.basename(bam_list[0]).split(self.extensions[4])[0] + '_merged.bam'
 
