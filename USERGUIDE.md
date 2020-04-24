@@ -26,15 +26,15 @@ For more details on managing conda enviroments [click here](https://docs.conda.i
 ### Step 2: Cloning the repository
 To clone the current repository on to your local repository using terminal, first navigate to the ***home directory*** (i.e., where you want analyzed data to be deposited), paste and enter the following command:
 ```
-git clone https://github.com/jkkbuddika/eCLIP-Data-Analyzer.git
+https://github.com/jkkbuddika/eCLIP_Data_Analyzer.git
 ls
 ```
 > eCLIP-Data-Analyzer       
 
 Once cloning is completed:
 ```
-mv eCLIP-Data-Analyzer/*/ ./
-rm -rf eCLIP-Data-Analyzer
+mv eCLIP_Data_Analyzer/*/ ./
+rm -rf eCLIP_Data_Analyzer
 ls
 ```
 > add_mat   
