@@ -47,4 +47,12 @@ class PureCLIPPeakCaller():
         command = ' '.join(command)
         sp.check_call(command, shell=True)
 
+        command = [
+            'cat', outfile_prefix + '_sites.bed', '|',
+            'cut -f 1,2,3,4,5,6 >', outfile_prefix + '_sites_short.bed'
+        ]
+
+        command = ' '.join(command)
+        sp.check_call(command, shell=True)
+
         print(ctw.CBEIGE + ctw.CBOLD + 'Peak Calling Completed!!!' + ctw.CEND)
