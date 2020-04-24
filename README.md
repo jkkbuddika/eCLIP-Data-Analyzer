@@ -7,7 +7,7 @@ The eCLIP data analyzer requires following tools to be installed for data analys
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) : Quality assessment
 - [Cutadapt](https://cutadapt.readthedocs.io/en/stable/) : Adaptor trimming
 - [BBMap](https://github.com/BioInfoTools/BBMap) : To collapse exact PCR duplicates
-- [UMI-tools](https://github.com/CGATOxford/UMI-tools) : Manipulation of UMIs (Unique Molecular Identifiers)
+- [UMI-tools](https://github.com/CGATOxford/UMI-tools) : Manipulation of UMIs and deduplication
 - [TagDust2](http://tagdust.sourceforge.net/) : Remove rRNA reads
 - [STAR](https://github.com/alexdobin/STAR) : Mapping reads to a given genome
 - [QualiMap](http://qualimap.bioinfo.cipf.es/) : Mapping quality assessment
@@ -15,6 +15,7 @@ The eCLIP data analyzer requires following tools to be installed for data analys
 - [deepTools](https://github.com/deeptools/deepTools/) : Generate bigwig files for IGV visualization
 - [Subread](http://subread.sourceforge.net/) : Count features
 - [MultiQC](https://github.com/ewels/MultiQC) : Summarize logs
+- [BedTools](https://github.com/arq5x/bedtools2) : Extraction of cross-linked nucleotides
 - [PureCLIP](https://github.com/skrakau/PureCLIP) : CLIP-peak calling
 
 We thank developers of these valueble tools!
