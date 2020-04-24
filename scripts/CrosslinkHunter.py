@@ -208,17 +208,3 @@ class CrosslinkHunter:
         df.columns = [final_column_headers]
         df.to_csv(outdir_summary + '/' + 'Insertion_Deletion_Data_Summary.csv', index=False)
         return df
-
-
-
-
-
-
-
-
-
-
-
-
-
-

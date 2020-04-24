@@ -19,7 +19,7 @@ class RefGenMaker:
 
         print(ctw.CBEIGE + ctw.CBOLD + 'Creating the STAR Reference Genome ...' + ctw.CEND + '\n')
 
-        param = [
+        command = [
             'STAR --runThreadN', self.threads,
             '--runMode genomeGenerate --genomeSAindexNbases 12',
             '--genomeDir', outdir + '/',
@@ -27,7 +27,7 @@ class RefGenMaker:
             '--sjdbGTFfile', self.genes_gtf
         ]
 
-        command = ' '.join(param)
+        command = ' '.join(command)
         sp.check_call(command, shell=True)
 
         print('\n' + ctw.CBEIGE + ctw.CBOLD + 'Reference Genome Created!!!' + ctw.CEND)

@@ -34,7 +34,7 @@ class FeatureCounter:
 
             command = [
                 'featureCounts -t', self.gfeature[i],
-                '-F GTF -g gene_name -O -M -s', self.stranded
+                '-F GTF -g gene_name --fracOverlap 0.05 --minOverlap 10 --primary -s', self.stranded
             ]
 
             if self.seq_method == 'paired': command.extend(['-p -B -C'])
@@ -59,4 +59,3 @@ class FeatureCounter:
 
         if i == len(self.gfeature):
             print('\n' + ctw.CBEIGE + ctw.CBOLD + 'Feature counting done!!!' + ctw.CEND + '\n')
-
