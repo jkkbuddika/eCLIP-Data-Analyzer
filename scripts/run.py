@@ -31,7 +31,7 @@ qc_1.fastqc()
 ca = CutAdapt.CutAdapt(cv.home_dir, cv.raw_sequences_dir, cv.r2_adapter, cv.r2_adapter_seq, cv.extensions, gv.seq_method)
 ca.cutadapt()
 
-ex_umi = UMITools.UMITools(cv.home_dir, cv.dupCollapse_dir, cv.extensions, gv.seq_method)
+ex_umi = UMITools.UMITools(cv.home_dir, cv.cutadapt_dir, cv.extensions, gv.seq_method)
 ex_umi.extract_UMI()
 
 td = Tagduster.Tagduster(cv.home_dir, cv.Threads, cv.tagdust_singu, cv.umi_extract, cv.rRNA_path, cv.extensions, gv.seq_method)

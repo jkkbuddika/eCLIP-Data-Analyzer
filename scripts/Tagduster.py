@@ -19,8 +19,8 @@ class Tagduster:
         outdir = os.path.join(self.home_dir, 'tagdust_out')
         if not os.path.isdir(outdir): os.mkdir(outdir)
 
-        r1_reads = sorted(glob.glob(self.input_dir + '*R1_unique_trimmed_UMI.fastq'))
-        r2_reads = sorted(glob.glob(self.input_dir + '*R2_unique_trimmed_UMI.fastq'))
+        r1_reads = sorted(glob.glob(self.input_dir + '*R1_trimmed_UMI.fastq'))
+        r2_reads = sorted(glob.glob(self.input_dir + '*R2_trimmed_UMI.fastq'))
 
         ctw = ColorTextWriter.ColorTextWriter()
 
@@ -30,14 +30,14 @@ class Tagduster:
             for i in r2_reads:
                 print('\n' + ctw.CBEIGE + ctw.CBOLD + 'Tagdusting: ' + ctw.CBLUE + os.path.basename(i) + ctw.CBEIGE + ctw.CBOLD + ' ...' + ctw.CEND + '\n')
 
-                output_file = outdir + '/' + os.path.basename(i).split('_R2_unique_trimmed_UMI.fastq')[0] + '_tagdustout'
+                output_file = outdir + '/' + os.path.basename(i).split('_R2_trimmed_UMI.fastq')[0] + '_tagdustout'
 
                 command = [
                     'module load singularity;singularity exec -e -C -B', self.home_dir,
                     '-H', self.home_dir, self.tagdust_sing,
                     'tagdust -t', self.threads,
                     '-1 O:N -2 R:N', '-o', output_file,
-                    '-ref', self.rrna_list, i
+                    '-ref', self.rrna_list,'-fe 2', i
                 ]
 
                 command = ' '.join(command)
@@ -54,7 +54,7 @@ class Tagduster:
                     '-H', self.home_dir, self.tagdust_sing,
                     'tagdust -t', self.threads,
                     '-1 O:N -2 R:N', '-o', output_file,
-                    '-ref', self.rrna_list, i, j
+                    '-ref', self.rrna_list, '-fe 2', i, j
                 ]
 
                 command = ' '.join(command)

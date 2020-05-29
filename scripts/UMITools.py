@@ -20,8 +20,8 @@ class UMITools:
 
         print(ctw.CBEIGE + ctw.CBOLD + 'Extracting UMIs ...' + ctw.CEND + '\n')
 
-        r1_reads = sorted(glob.glob(self.input_dir + '*R1_unique_trimmed.fastq'))
-        r2_reads = sorted(glob.glob(self.input_dir + '*R2_unique_trimmed.fastq'))
+        r1_reads = sorted(glob.glob(self.input_dir + '*R1_trimmed.fastq'))
+        r2_reads = sorted(glob.glob(self.input_dir + '*R2_trimmed.fastq'))
 
         if self.seq_method == 'single':
             for i in r2_reads:

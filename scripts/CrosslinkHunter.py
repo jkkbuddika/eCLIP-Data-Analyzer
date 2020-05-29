@@ -17,7 +17,7 @@ class CrosslinkHunter:
         outdir = os.path.join(self.home_dir, 'crosslink_data')
         if not os.path.isdir(outdir): os.mkdir(outdir)
 
-        bam_list = sorted(glob.glob(self.input_dir + '*_UV*.bam'))
+        bam_list = sorted(glob.glob(self.input_dir + '*UV*.bam'))
 
         ctw = ColorTextWriter.ColorTextWriter()
 
@@ -28,10 +28,6 @@ class CrosslinkHunter:
         for i in bam_list:
 
             print('\n' + ctw.CRED + 'Detection of cross-linked nucleotides: ' + ctw.CBLUE + os.path.basename(i) + ctw.CRED + ' ...' + ctw.CEND + '\n')
-
-            #numberReads = sp.check_output(['samtools view -c ' + i], shell=True, universal_newlines=True)
-            #scale_fac = 1000000/numberReads
-            #print('Scale Factor = ' + scale_fac)
 
             output_file = outdir + '/' + os.path.basename(i).split('.bam')[0] + '_shifted.bed'
 
@@ -62,7 +58,7 @@ class CrosslinkHunter:
                 sp.check_call(command, shell=True)
 
                 command = [
-                    'sort -k1,1 -k2,2n', output_file.split('.bed')[0] + bedgraph_extension[x],
+                    'LC_COLLATE=C sort -k1,1 -k2,2n', output_file.split('.bed')[0] + bedgraph_extension[x],
                     '>', output_file.split('.bed')[0] + '_sorted' + bedgraph_extension[x]
                 ]
 
@@ -89,8 +85,8 @@ class CrosslinkHunter:
         outdir_summary = os.path.join(self.home_dir, 'summary_files')
         if not os.path.isdir(outdir_summary): os.mkdir(outdir_summary)
 
-        plus = sorted(glob.glob(outdir + '/' + '*_UV*_plus.bedgraph'))
-        minus = sorted(glob.glob(outdir + '/' + '*_UV*_minus.bedgraph'))
+        plus = sorted(glob.glob(outdir + '/' + '*UV*_plus.bedgraph'))
+        minus = sorted(glob.glob(outdir + '/' + '*UV*_minus.bedgraph'))
 
         ctw = ColorTextWriter.ColorTextWriter()
 
@@ -160,7 +156,7 @@ class CrosslinkHunter:
         outdir_summary = os.path.join(self.home_dir, 'summary_files')
         if not os.path.isdir(outdir_summary): os.mkdir(outdir_summary)
 
-        bam_list = sorted(glob.glob(self.input_dir + '*_UV*.bam'))
+        bam_list = sorted(glob.glob(self.input_dir + '*UV*.bam'))
 
         ctw = ColorTextWriter.ColorTextWriter()
 

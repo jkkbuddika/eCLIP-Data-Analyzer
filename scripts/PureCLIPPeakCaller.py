@@ -18,9 +18,9 @@ class PureCLIPPeakCaller():
 
         ctw = ColorTextWriter.ColorTextWriter()
 
-        uv1_list = sorted(glob.glob(self.input_dir + '*_UV1*.bam'))
-        uv2_list = sorted(glob.glob(self.input_dir + '*_UV2*.bam'))
-        input_list = sorted(glob.glob(self.input_dir + '*_In*.bam'))
+        uv1_list = sorted(glob.glob(self.input_dir + '*UV1*.bam'))
+        uv2_list = sorted(glob.glob(self.input_dir + '*UV2*.bam'))
+        input_list = sorted(glob.glob(self.input_dir + '*IN*.bam'))
 
         x = 0
 
@@ -53,7 +53,7 @@ class PureCLIPPeakCaller():
             ]
 
             command = ' '.join(command)
-            sp.check_call(command, shell=True)
+            #sp.check_call(command, shell=True)
 
             command = [
                 'cat', outfile_prefix + '_sites.bed', '|',
@@ -61,7 +61,7 @@ class PureCLIPPeakCaller():
             ]
 
             command = ' '.join(command)
-            sp.check_call(command, shell=True)
+            #sp.check_call(command, shell=True)
 
             #### Peak Calling with Input Normalization
 
