@@ -28,7 +28,7 @@ class PureCLIPPeakCaller():
 
             print(ctw.CRED + 'Merging replicates and indexing:' + ctw.CBLUE + os.path.basename(i) + ctw.CRED + ' and ' + ctw.CBLUE + os.path.basename(j) + ctw.CRED + ' ...' + ctw.CEND + '\n')
 
-            merged_bam = outdir + '/' + os.path.basename(uv1_list[0]).split(self.extensions[4])[0] + '_merged.bam'
+            merged_bam = outdir + '/' + os.path.basename(i).split(self.extensions[4])[0] + '_merged.bam'
 
             command = [
                 'samtools merge', merged_bam, i, j
@@ -38,34 +38,11 @@ class PureCLIPPeakCaller():
             sp.check_call(command, shell=True)
             sp.check_call(' '.join(['samtools index', merged_bam]), shell=True)
 
-            #### Peak Calling with no Input Normalization
-
-            print(ctw.CRED + 'Peak Calling using PureCLIP ' + ctw.CBLUE + '...' + ctw.CEND + '\n')
-
-            outfile_prefix = outdir + '/' + 'pureclip_crosslink'
-
-            command = [
-                'pureclip',
-                '-i', merged_bam, '-bai', merged_bam + '.bai',
-                '-g', self.genome_fa, '-ld -nt 8',
-                '-o', outfile_prefix + '_sites.bed',
-                '-or', outfile_prefix + '_regions.bed'
-            ]
-
-            command = ' '.join(command)
-            #sp.check_call(command, shell=True)
-
-            command = [
-                'cat', outfile_prefix + '_sites.bed', '|',
-                'cut -f 1,2,3,4,5,6 >', outfile_prefix + '_sites_short.bed'
-            ]
-
-            command = ' '.join(command)
-            #sp.check_call(command, shell=True)
-
             #### Peak Calling with Input Normalization
 
             sp.check_call(' '.join(['samtools index', input_list[x]]), shell=True)
+
+            outfile_prefix = outdir + '/' + os.path.basename(i).split(self.extensions[4])[0] + '_pureclip_crosslink'
 
             command = [
                 'pureclip',

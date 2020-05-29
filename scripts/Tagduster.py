@@ -36,8 +36,8 @@ class Tagduster:
                     'module load singularity;singularity exec -e -C -B', self.home_dir,
                     '-H', self.home_dir, self.tagdust_sing,
                     'tagdust -t', self.threads,
-                    '-1 O:N -2 R:N', '-o', output_file,
-                    '-ref', self.rrna_list,'-fe 2', i
+                    '-1 R:N', '-o', output_file,
+                    '-ref', self.rrna_list,'-fe 0', i
                 ]
 
                 command = ' '.join(command)
@@ -53,8 +53,8 @@ class Tagduster:
                     'module load singularity;singularity exec -e -C -B', self.home_dir,
                     '-H', self.home_dir, self.tagdust_sing,
                     'tagdust -t', self.threads,
-                    '-1 O:N -2 R:N', '-o', output_file,
-                    '-ref', self.rrna_list, '-fe 2', i, j
+                    '-1 R:N', '-o', output_file,
+                    '-ref', self.rrna_list, '-fe 0', i, j
                 ]
 
                 command = ' '.join(command)
