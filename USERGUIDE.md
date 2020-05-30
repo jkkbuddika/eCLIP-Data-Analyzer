@@ -22,6 +22,9 @@ ls
 ### Step 2: Setup the miniconda environment
 There are two ways to set up the conda environment: (1) Using the *environment.yml* file in the **environment** directory or (2) manually creating a conda environment and installing all required packages. The advantage of using the first approach is, it gives the conda environment I used when I was writing this python pipeline. However, the second approach let you install the latest versions of required packages. Note that based on the version of a similar tool, the output results can be varied. Let's go through how to both of these.
 
+#### Install miniconda
+Before creating the environment, [install](https://conda.io/projects/conda/en/latest/user-guide/install/index.html?highlight=conda) miniconda and add conda to you PATH. Then update conda by running ```conda update conda```.
+
 #### Setting up the miniconda environment with the *environment.yml* file
 Simply copy, paste and run the following command on your terminal window.
 
@@ -164,4 +167,3 @@ echo ${i} $(samtools view -c $i)
 done > bam_readCounts_aligned.txt
 ```
 > Executing the above bash command will save a file named *bam_readCounts_aligned.txt* in the *star_aligned* directory with bam file names and number of reads that are mapped to the reference genome.
-
