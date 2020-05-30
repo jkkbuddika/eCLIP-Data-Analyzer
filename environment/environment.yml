@@ -240,5 +240,3 @@ dependencies:
 - libarchive=3.3.3=h5d8350f_5
 - libtiff=4.1.0=h2733197_0
 - mysql-connector-c=6.1.11=h597af5e_1
-prefix: /N/u/jbuddika/Carbonate/.conda/envs/dataanalyzer
-
