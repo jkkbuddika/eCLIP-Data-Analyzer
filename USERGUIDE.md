@@ -1,9 +1,5 @@
 # User guide
-Please read through this step-by-step guide to setup and begin analysis of your data (**very IMPORTANT!!!**). This is a ***six*** step process. But, let's get started with memory requirements to run the pipeline.
-
-### Memory requirement
-Although the required memory is depended upon the number of total reads in each library we have had successfully used this pipeline with following memory specifications:
-
+Please read through this step-by-step guide to setup and begin analysis of your data (**very IMPORTANT!!!**). This is a simple ***six*** step process:
 
 ### Step 1: Clone the repository
 To clone the current repository on to your home directory using terminal, first navigate to the ***home directory*** (i.e., where you want analyzed data to be deposited), paste and enter the following command:
@@ -112,8 +108,10 @@ ls
 
 Then upload input sequences to the *raw_sequences* directory. Naming of files is ***very important*** and follow the recommended naming scheme. Name of an input fastq file must follow the following order:
 ***'_sample_adaptor_R1.fastq'*** or/and ***'_sample_adaptor_R2.fastq'***
-> Note that ***'sample'*** above supports *three* options: (1) **IN** for ***input*** datasets (which usually is a single dataset), (2) **UV1**, **UV2**, ..., **UVn** for any number of UV samples, and (3) **nonUV** for non-UV controls (which usually is a one dataset).                   
+> Note that ***'sample'*** above supports *three* options: (1) **IN** for ***input*** datasets (which usually is a single dataset), (2) **UV1**, **UV2**, ..., **UVn** for any number of ***UV samples***, and (3) **nonUV** for ***non-UV controls*** (which usually is a one dataset).                   
+
 > Note that the ***'adaptor'*** above denotes the 3'-adaptor used in that particular library. Options are limited to conventional eCLIP adaptors: **L19**, **X1A**, **X1B**, **X2A**, **X2B**, **A01** or **B06**. Make sure to use the adaptor identities given here.        
+
 > Here is a pair of acceptable input file names: ***pum2_IN_L19_R1.fastq***, ***pum2_IN_L19_R2.fastq***         
 
 Remember, this naming scheme is vitally important!!! Pay extra attention to this.
@@ -140,4 +138,4 @@ cd scripts
 python run.py
 ```
 
-This will start running the pipeline! Time to get some rest. Watch a movie or a couple of episodes of TV show! You got plenty of time!!!
+This will start running the pipeline! Time to get some rest. Watch a movie or a couple of episodes of a TV show! You got plenty of time!!!
