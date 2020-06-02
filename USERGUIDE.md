@@ -11,8 +11,8 @@ ls
 
 Once the cloning is completed:
 ```
-mv eCLIP_Data_Analyzer/*/ ./
-rm -rf eCLIP_Data_Analyzer
+mv eCLIP-Data-Analyzer/*/ ./
+rm -rf eCLIP-Data-Analyzer
 ls
 ```
 > add_mat   
