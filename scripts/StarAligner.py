@@ -41,9 +41,8 @@ class StarAligner:
                         '--genomeDir', self.genome_dir,
                         '--outFileNamePrefix',
                         output_file.split(self.extensions[4])[0], '>', output_file,
-                        '--outFilterMismatchNoverReadLmax 0.04 --outFilterMismatchNmax 999',
-                        '--outReadsUnmapped Fastx --outSJfilterReads Unique --outFilterMultimapNmax 1 --alignEndsType Extend5pOfRead1',
-                        '--outStd BAM_SortedByCoordinate --outSAMtype BAM SortedByCoordinate',
+                        '--outReadsUnmapped Fastx --outSJfilterReads Unique --outFilterMultimapNmax 1',
+                        '--outStd BAM_SortedByCoordinate --outSAMtype BAM SortedByCoordinate --alignEndsType EndToEnd',
                         '--readFilesIn', i
                     ]
 
@@ -63,9 +62,8 @@ class StarAligner:
                         '--genomeDir', self.genome_dir,
                         '--outFileNamePrefix',
                         output_file.split(self.extensions[4])[0], '>', output_file,
-                        '--outFilterMismatchNoverReadLmax 0.04 --outFilterMismatchNmax 999',
-                        '--outReadsUnmapped Fastx --outSJfilterReads Unique --outFilterMultimapNmax 1 --alignEndsType Extend5pOfRead1',
-                        '--outStd BAM_SortedByCoordinate --outSAMtype BAM SortedByCoordinate',
+                        '--outReadsUnmapped Fastx --outSJfilterReads Unique --outFilterMultimapNmax 1',
+                        '--outStd BAM_SortedByCoordinate --outSAMtype BAM SortedByCoordinate --alignEndsType EndToEnd',
                         '--readFilesIn', i, j
                     ]
 
