@@ -26,7 +26,7 @@ class SamTools():
 
                 print(ctw.CRED + 'Filtering and Sorting: ' + ctw.CBLUE + os.path.basename(i) + ctw.CRED + ' ...' + ctw.CEND + '\n')
 
-                output_file = outdir + '/' + os.path.basename(i).split('.bam')[0] + 'sorted' + self.extensions[4]
+                output_file = outdir + '/' + os.path.basename(i).split('.bam')[0] + '_sorted' + self.extensions[4]
 
                 command = ['samtools sort -@', self.threads,'-T', outdir + '/', i, '|']
 
