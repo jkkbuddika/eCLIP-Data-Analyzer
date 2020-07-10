@@ -29,7 +29,7 @@ class PureCLIPPeakCaller():
 
             print(ctw.CRED + 'Merging replicates and indexing:' + ctw.CBLUE + os.path.basename(i) + ctw.CRED + ' and ' + ctw.CBLUE + os.path.basename(j) + ctw.CRED + ' ...' + ctw.CEND + '\n')
 
-            merged_bam = outdir + '/' + os.path.basename(i).split(self.extensions[4])[0] + '_merged.bam'
+            merged_bam = outdir + '/' + os.path.basename(i).split('_UV')[0] + '_UV_aligned_sorted_dupRm_merged.bam'
 
             command = [
                 'samtools merge', merged_bam, i, j
