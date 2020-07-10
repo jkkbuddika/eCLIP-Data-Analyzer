@@ -2,6 +2,7 @@ import os
 import glob
 import subprocess as sp
 import ColorTextWriter
+import BigWigFileMaker
 
 class PureCLIPPeakCaller():
 
@@ -65,5 +66,9 @@ class PureCLIPPeakCaller():
             sp.check_call(command, shell=True)
 
             x = x + 1
+
+        #### Generate wiggle files for merged bam files
+        bw = BigWigFileMaker.BigWigFileMaker(self.home_dir, outdir + '/', self.extensions)
+        bw.bigwig()
 
         print(ctw.CBEIGE + ctw.CBOLD + 'Peak Calling Completed!!!' + ctw.CEND)
