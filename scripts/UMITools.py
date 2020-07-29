@@ -5,10 +5,11 @@ import ColorTextWriter
 
 class UMITools:
 
-    def __init__(self, home_dir, input_dir, extensions, seq_method):
+    def __init__(self, home_dir, input_dir, extensions, umi, seq_method):
         self.home_dir = home_dir
         self.input_dir = input_dir
         self.extensions = extensions
+        self.umi = umi
         self.seq_method = seq_method
 
     def extract_UMI(self):
@@ -20,8 +21,8 @@ class UMITools:
 
         print(ctw.CBEIGE + ctw.CBOLD + 'Extracting UMIs ...' + ctw.CEND + '\n')
 
-        r1_reads = sorted(glob.glob(self.input_dir + '*R1_trimmed.fastq'))
-        r2_reads = sorted(glob.glob(self.input_dir + '*R2_trimmed.fastq'))
+        r1_reads = sorted(glob.glob(self.input_dir + '*R1*.fastq'))
+        r2_reads = sorted(glob.glob(self.input_dir + '*R2*.fastq'))
 
         if self.seq_method == 'single':
             for i in r2_reads:
@@ -31,7 +32,7 @@ class UMITools:
 
                 param = [
                     'umi_tools extract --extract-method=string',
-                    '--stdin=' + i, '--bc-pattern=NNNNNNNNNN',
+                    '--stdin=' + i, '--bc-pattern=' + self.umi,
                     '--stdout=' + output_file,
                     '-L', output_file.split('_R2')[0] + '_UMI_extract.log'
                 ]
@@ -49,7 +50,7 @@ class UMITools:
                 command = [
                     'umi_tools extract --extract-method=string',
                     '--stdin=' + j, '--stdout=' + output_file_R2,
-                    '--bc-pattern=NNNNNNNNNN', '--read2-in=' + i, '--read2-out=' + output_file_R1,
+                    '--bc-pattern=' + self.umi, '--read2-in=' + i, '--read2-out=' + output_file_R1,
                     '-L', output_file_R1.split('_R1')[0] + '_UMI_extract.log'
                 ]
 

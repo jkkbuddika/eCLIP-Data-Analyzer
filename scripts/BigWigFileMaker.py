@@ -41,5 +41,3 @@ class BigWigFileMaker():
 
             command = ' '.join(command)
             sp.check_call(command, shell=True)
-
-        print('\n' + ctw.CBEIGE + ctw.CBOLD + 'BigWig files were deposited!!!' + ctw.CEND + '\n')

@@ -6,10 +6,11 @@ import BigWigFileMaker
 
 class PureCLIPPeakCaller():
 
-    def __init__(self, home_dir, input_dir, genome_fa, extensions):
+    def __init__(self, home_dir, input_dir, genome_fa, run_mode, extensions):
         self.home_dir = home_dir
         self.input_dir = input_dir
         self.genome_fa = genome_fa
+        self.run_mode = run_mode
         self.extensions = extensions
 
     def peak_caller(self):
@@ -48,11 +49,17 @@ class PureCLIPPeakCaller():
             command = [
                 'pureclip',
                 '-i', merged_bam, '-bai', merged_bam + '.bai',
-                '-g', self.genome_fa, '-ld -nt 8',
+                '-g', self.genome_fa, '-ld -nt 8'
+            ]
+
+            if self.run_mode == '0': command.extend(['-bc 0'])
+            if self.run_mode == '1': command.extend(['-bc 1'])
+
+            command.extend([
                 '-o', outfile_prefix + '_INnorm_sites.bed',
                 '-or', outfile_prefix + '_INnorm_regions.bed',
                 '-ibam', input_list[x], '-ibai', input_list[x] + '.bai'
-            ]
+            ])
 
             command = ' '.join(command)
             sp.check_call(command, shell=True)

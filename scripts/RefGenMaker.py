@@ -4,10 +4,11 @@ import ColorTextWriter
 
 class RefGenMaker:
 
-    def __init__(self, home_dir, threads, genome_fasta, genes_gtf):
+    def __init__(self, home_dir, threads, genome_fasta, species, genes_gtf):
         self.home_dir = home_dir
         self.threads = threads
         self.genome_fasta = genome_fasta
+        self.species = species
         self.genes_gtf = genes_gtf
 
     def refgen(self):
@@ -17,15 +18,20 @@ class RefGenMaker:
 
         ctw = ColorTextWriter.ColorTextWriter()
 
-        print(ctw.CBEIGE + ctw.CBOLD + 'Creating the STAR Reference Genome ...' + ctw.CEND + '\n')
+        print(ctw.CBEIGE + ctw.CBOLD + 'Generating the STAR Reference Genome ...' + ctw.CEND + '\n')
 
         command = [
             'STAR --runThreadN', self.threads,
-            '--runMode genomeGenerate --genomeSAindexNbases 12',
+            '--runMode genomeGenerate'
+        ]
+
+        if self.species == 'ce': command.extend(['--genomeSAindexNbases 12'])
+
+        command.extend([
             '--genomeDir', outdir + '/',
             '--genomeFastaFiles', self.genome_fasta,
             '--sjdbGTFfile', self.genes_gtf
-        ]
+        ])
 
         command = ' '.join(command)
         sp.check_call(command, shell=True)

@@ -33,7 +33,7 @@ class Tagduster:
                 output_file = outdir + '/' + os.path.basename(i).split('_R2_trimmed_UMI.fastq')[0] + '_tagdustout'
 
                 command = [
-                    'module load singularity;singularity exec -e -C -B', self.home_dir,
+                    'singularity exec -e -C -B', self.home_dir,
                     '-H', self.home_dir, self.tagdust_sing,
                     'tagdust -t', self.threads,
                     '-1 R:N', '-o', output_file,
@@ -50,7 +50,7 @@ class Tagduster:
                 output_file = outdir + '/' + os.path.basename(i).split('_R1_trimmed_UMI.fastq')[0] + '_tagdustout'
 
                 command = [
-                    'module load singularity;singularity exec -e -C -B', self.home_dir,
+                    'singularity exec -e -C -B', self.home_dir,
                     '-H', self.home_dir, self.tagdust_sing,
                     'tagdust -t', self.threads,
                     '-1 R:N', '-o', output_file,

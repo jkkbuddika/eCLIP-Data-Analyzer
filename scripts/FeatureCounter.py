@@ -6,11 +6,10 @@ import ColorTextWriter
 
 class FeatureCounter:
 
-    def __init__(self, home_dir, input_dir, gfeature, stranded, feature_dir, feature_file, extensions, seq_method):
+    def __init__(self, home_dir, input_dir, gfeature, feature_dir, feature_file, extensions, seq_method):
         self.home_dir = home_dir
         self.input_dir = input_dir
         self.gfeature = gfeature
-        self.stranded = stranded
         self.feature_dir = feature_dir
         self.feature_file = feature_file
         self.extensions = extensions
@@ -34,7 +33,7 @@ class FeatureCounter:
 
             command = [
                 'featureCounts -t', self.gfeature[i],
-                '-F GTF -g gene_name --fracOverlap 0.05 --minOverlap 10 --primary -s', self.stranded
+                '-F GTF -g gene_name --fracOverlap 0.05 --minOverlap 10 --primary -s 0'
             ]
 
             if self.seq_method == 'paired': command.extend(['-p -B -C'])

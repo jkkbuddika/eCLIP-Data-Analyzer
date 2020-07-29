@@ -6,10 +6,11 @@ import ColorTextWriter
 
 class CrosslinkHunter:
 
-    def __init__(self, home_dir, input_dir, genome_fasta, extensions):
+    def __init__(self, home_dir, input_dir, genome_fasta, threads, extensions):
         self.home_dir = home_dir
         self.input_dir = input_dir
         self.genome_fasta = genome_fasta
+        self.threads = threads
         self.extensions = extensions
 
     def crosslink(self):
@@ -33,12 +34,29 @@ class CrosslinkHunter:
 
             #### Convert bam to bed and shift intervals 1bp upstream to identify the cross-linked nucleotide
             bamtoshiftedbed = [
-                'bedtools bamtobed -i', i, '|',
+                'bamToBed -i', i, '-bed12', '|',
                 'bedtools shift -m 1 -p -1 -g', fai_file, '>', output_file
             ]
 
             bamtoshiftedbed = ' '.join(bamtoshiftedbed)
             sp.check_call(bamtoshiftedbed, shell=True)
+
+            #### Convert shifted bed to bam
+            shiftedbedtobam = [
+                'bedToBam -i', output_file,
+                '-g', fai_file, '-bed12', '>', output_file.split('.bed')[0] + '.bam'
+            ]
+
+            shiftedbedtobam = ' '.join(shiftedbedtobam)
+            sp.check_call(shiftedbedtobam,shell=True)
+
+            command = [
+                'samtools sort -@', self.threads, '-T', outdir + '/', output_file.split('.bed')[0] + '.bam',
+                '-o', output_file.split('.bed')[0] + '.bam'
+            ]
+
+            command = ' '.join(command)
+            sp.check_call(command, shell=True)
 
             #### Make coverage tracks for plus and minus strands
             strand = ['+', '-']
