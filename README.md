@@ -2,12 +2,12 @@
 This repository contains a series of python based modules to automate the analysis of sequencing data generated from eCLIP (enhanced UV crosslinking and immunoprecipitation) experiments. I ***highly recommend*** reading through this step-by-step manual *carefully* before you start analyzing your data. If you require a protocol for eCLIP library preparation please look at the Yeo Lab eCLIP library preparation protocol given in their original [paper](https://www.nature.com/articles/nmeth.3810).
 
 ## Requirements
-The eCLIP data analyzer requires following tools to be installed for data analysis.
+The eCLIP data analyzer requires following tools to be installed for data analysis (see [Step 2](https://github.com/jkkbuddika/eCLIP-Data-Analyzer/blob/master/USERGUIDE.md#step-2-setup-the-miniconda-environment) of the User Guide).
 
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) : Quality assessment
 - [Cutadapt](https://cutadapt.readthedocs.io/en/stable/) : Adaptor trimming
 - [UMI-tools](https://github.com/CGATOxford/UMI-tools) : Extraction of UMIs and deduplication
-- [TagDust2](http://tagdust.sourceforge.net/) : Remove rRNA reads
+- [TagDust2](http://tagdust.sourceforge.net/) : Removal of rRNA reads
 - [STAR](https://github.com/alexdobin/STAR) : Mapping reads to a given genome
 - [QualiMap](http://qualimap.bioinfo.cipf.es/) : Mapping quality assessment
 - [SAMtools](https://github.com/samtools/samtools) : Sorting and indexing of mapped reads
@@ -15,7 +15,7 @@ The eCLIP data analyzer requires following tools to be installed for data analys
 - [Subread](http://subread.sourceforge.net/) : Count features
 - [MultiQC](https://github.com/ewels/MultiQC) : Summarize logs
 - [BedTools](https://github.com/arq5x/bedtools2) : Extraction of cross-linked nucleotides
-- [PureCLIP](https://github.com/skrakau/PureCLIP) : CLIP-peak calling
+- [PureCLIP](https://github.com/skrakau/PureCLIP) : eCLIP-peak calling
 
 We thank developers of these valueble tools!
 
