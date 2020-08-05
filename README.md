@@ -25,3 +25,5 @@ All analyzed data will be saved to subdirectories inside the home directory wher
 Cross-link sites can be recovered using R2 reads of eCLIP data. Therefore, the pipeline allows analysis in ***two different*** modes: (1) ***Single-end mode*** where only *R2 reads* of the pair are used for analysis (we frequently use this mode for our analyzes) and (2) ***Paired-end mode*** where both R1/R2 reads are used at earlier steps of analysis, but extract only *mapped R2 reads* following deduplication.
 
 Now that you know the general outline of the analysis process, go through the step-by-step guide given [here](https://github.com/jkkbuddika/eCLIP-Data-Analyzer/blob/master/USERGUIDE.md) to analyze your eCLIP data.
+
+If you use eCLIP Data Analyzer, please cite: https://doi.org/10.1101/2020.06.27.175174
