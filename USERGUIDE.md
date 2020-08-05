@@ -103,7 +103,7 @@ This should intiate running the analysis pipeline. Immediately, a couple questio
 - **Enter the species code (Options: hs, mm, dm, ce, dr or custom):** Answer based on the species, **hs**: human, **mm**: mouse, **dm**: fruit fly, **ce**: *C. elegans*, **dr**: zebra fish or **custom**: any other model organism
 - **Enter the Run Mode (Options: 0 for single-end or 1 for paired-end):** Pipeline supports analysis of both single-end or paired-end data. Answer **0** if single-end. Answer **1** if paired-end.
 - **Enter the UMI Preference (Options: 0 for 5N or 1 for 10N):** Answer based on the used UMI-sequence length, **0**: NNNNN (5N), **1**: NNNNNNNNNN (10N).
-- **Enter the PureCLIP Run Mode (Options: 0 for short-defined or 1 for undefined):** The pipeline allows running PureCLIP in two modes, **0**: short defined binding regions, **1**: larger binding regions.
+- **Enter the PureCLIP Run Mode (Options: 0 for short-defined or 1 for long-undefined):** The pipeline allows running PureCLIP in two modes, **0**: short defined binding regions, **1**: larger binding regions.
 
 If the species is **custom**, you have to:
 - **FTP link to the genome to download:** Enter the link to the genome FASTA to download. For instance, if the custom species is yeast here is the Ensembl url to download the genome.
