@@ -36,7 +36,7 @@ class CutAdapt:
                     trim_file_R2 = outdir_1 + '/' + os.path.basename(j).split(os.path.splitext(i)[1])[0] + '_trimmed' + self.extensions[0]
 
                     command = [
-                        'cutadapt -f fastq --match-read-wildcards --times 2 -e 0.1 -O 1 --quality-cutoff 5 -m 28',
+                        'cutadapt -f fastq --match-read-wildcards --times 2 -e 0.1 -O 1 --quality-cutoff 5 -m 20',
                         self.r2_adapter_seq[x],
                         '-o', trim_file_R1, '-p', trim_file_R2, i, j,
                         '>', trim_file_R1.split('_R1_trimmed')[0] + '_trim.matrics' + self.extensions[3]
