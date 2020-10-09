@@ -54,7 +54,7 @@ wd.download()
 wd = WebDownloader.WebDownloader(cv.home_dir, cv.feature_dir_name, cv.feature_path, cv.feature_file)
 wd.download()
 
-rg = RefGenMaker.RefGenMaker(cv.home_dir, cv.Threads, cv.genome_fa, gv.species, cv.genes_gtf)
+rg = RefGenMaker.RefGenMaker(cv.home_dir, cv.Threads, cv.genome_fa, cv.genes_gtf)
 rg.refgen()
 
 sa = GenomeAligner.GenomeAligner(cv.home_dir, cv.tagdust_out, cv.Threads, cv.ref_genome, cv.extensions, cv.genes_gtf, cv.seq_method)
